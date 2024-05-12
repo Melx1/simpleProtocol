@@ -17,7 +17,7 @@ TCPStream::~TCPStream() {
     close(m_sd);
 }
 
-ssize_t TCPStream::send(const void* buffer, size_t len, int flags) {
+ssize_t TCPStream::send(const void* buffer, size_t len, int flags) const {
     return ::send(m_sd, buffer, len, flags);
 }
 
@@ -79,8 +79,8 @@ bool TCPStream::waitForReadEvent(int timeout) {
     fd_set sdset;
     struct timeval tv{};
 
-    tv.tv_sec = timeout;
-    tv.tv_usec = 0;
+    tv.tv_sec = 0;
+    tv.tv_usec = timeout;
     FD_ZERO(&sdset);
     FD_SET(m_sd, &sdset);
     if (select(m_sd+1, &sdset, nullptr, nullptr, &tv) > 0) {

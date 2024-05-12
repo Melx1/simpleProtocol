@@ -4,6 +4,8 @@
 #include <bitset>
 #include <vector>
 #include <ctime>
+#include <cstdint>
+
 
 using FrameLength = uint32_t;
 using PointId     = uint32_t;
@@ -12,8 +14,7 @@ using AnalogValue = float;
 using TimeTag     = std::time_t;
 using SignalCount = uint16_t;
 
-std::ostream& operator<<(std::ostream& os, const DigitValue& value);
-
+std::ostream& operator<<(std::ostream& os, DigitValue obj);
 
 enum class FrameType : uint8_t {
      DigitalPoints        = 1
@@ -42,10 +43,7 @@ enum class TransmissionType : uint8_t {
 };
 
 //length is count of byte
-constexpr uint32_t HeaderSize      = sizeof(FrameLength) + sizeof(FrameType);
-constexpr uint32_t DigitPointSize  = sizeof(PointId) + sizeof(DigitValue) + sizeof(TimeTag) + sizeof(Quality);
-constexpr uint32_t AnalogPointSize = sizeof(PointId) + sizeof(AnalogValue) + sizeof(TimeTag) + sizeof(Quality);
-
+constexpr size_t HeaderSize = sizeof(FrameLength) + sizeof(FrameType);
 
 
 #endif //SIMPLEPROTOCOL_SPTYPE_H

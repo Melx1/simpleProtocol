@@ -13,18 +13,17 @@
 #include <string>
 
 
-class TCPStream
-{
+class TCPStream {
     int          m_sd;
     std::string  m_peerIP;
     int          m_peerPort;
 
-  public:
+public:
     friend class TCPConnector;
 
     ~TCPStream();
 
-    ssize_t send(const void* buffer, size_t len, int flags);
+    ssize_t send(const void* buffer, size_t len, int flags) const;
     ssize_t sendAll(uint8_t* buffer, size_t len, int flags);
     ssize_t receive(void* buffer, size_t len, int flags, int timeout = 0);
     ssize_t receiveAll(uint8_t* buffer, size_t len, int flags, int timeout = 0);
@@ -38,7 +37,8 @@ class TCPStream
         connectionTimedOut = -2
     };
 
-  private:
+
+private:
     bool waitForReadEvent(int timeout);
 
     TCPStream(int sd, struct sockaddr_in* address);

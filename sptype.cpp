@@ -1,5 +1,5 @@
 #include "sptype.h"
-
+#include <iostream>
 
 Quality operator|(Quality lhs, Quality rhs) {
     using QualityType = std::underlying_type<Quality>::type;
@@ -30,12 +30,13 @@ std::ostream& operator<<(std::ostream& os, const Quality& obj) {
         sep = ", ";
     }
     str.append("]");
-    os << str;
 
+    os << str;
     return os;
 }
 
-
-std::ostream& operator<<(std::ostream& os, const DigitValue& value) {
-    os << static_cast<int>(value);
+std::ostream& operator<<(std::ostream &os, DigitValue obj) {
+    os << static_cast<int>(obj);
+    return os;
 }
+
